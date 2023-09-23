@@ -1,16 +1,18 @@
 import type { Id } from "./_types";
 
-type CreateMovieDTO = {
+const movieKeys = ["id", "title", "description", "release_date"];
+
+export type CreateMovieDTO = {
   title: string;
   description: string;
-  releaseDate: Date;
+  release_date: Date;
 };
 
 export type Movie = {
   id: Id;
   title: string;
   description: string;
-  releaseDate: Date;
+  release_date: Date;
 };
 
 export class MovieService {
@@ -63,24 +65,48 @@ export class MovieService {
   };
 }
 
+export const parseRawMovieInput = (
+  movie: CreateMovieDTO,
+  allowPartials: boolean = false
+) => {
+  if (
+    !allowPartials &&
+    (movie.title === undefined ||
+      movie.description === undefined ||
+      movie.release_date === undefined)
+  )
+    throw new Error(`One or more fields missing [${movieKeys.join(", ")}]`);
+
+  const parsedMovie: any = {};
+  console.log("movie keys", Object.keys(movie));
+  Object.keys(movie).forEach((key) => {
+    if (movieKeys.includes(key)) parsedMovie[key] = movie[key];
+  });
+
+  if (parsedMovie.release_date)
+    parsedMovie.release_date = new Date(parsedMovie.release_date);
+
+  return parsedMovie;
+};
+
 const movies: CreateMovieDTO[] = [
   {
     title: "Oppenheimer",
     description:
       "The story of American scientist, J. Robert Oppenheimer, and his role in the development of the atomic bomb.",
-    releaseDate: new Date("2023-09-1"),
+    release_date: new Date("2023-09-1"),
   },
   {
     title: "Tenet",
     description:
       "Armed with only one word, Tenet, and fighting for the survival of the entire world, a Protagonist journeys through a twilight world of international espionage on a mission that will unfold in something beyond real time.",
-    releaseDate: new Date("2022-10-15"),
+    release_date: new Date("2022-10-15"),
   },
   {
     title: "Dunkirk",
     description:
       "Allied soldiers from Belgium, the British Commonwealth and Empire, and France are surrounded by the German Army and evacuated during a fierce battle in World War II.",
-    releaseDate: new Date("2017-07-21"),
+    release_date: new Date("2017-07-21"),
   },
 ];
 

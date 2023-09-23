@@ -1,23 +1,62 @@
 ### api/movies
-
 GET http://localhost:3000/api/movies
 
 ###
-
 DELETE http://localhost:3000/api/movies
 
+###
+POST http://localhost:3000/api/movies
+Content-Type: application/json
+
+{
+    "title": "Man of Steel",
+    "description": "An alien child is evacuated from his dying world and sent to Earth to live among humans. His peace is threatened when other survivors of his home planet invade Earth."
+}
+
+###
+POST http://localhost:3000/api/movies
+Content-Type: application/json
+
+{
+    "title": "Man of Steel",
+    "description": "An alien child is evacuated from his dying world and sent to Earth to live among humans. His peace is threatened when other survivors of his home planet invade Earth.",
+    "release_date": "2023-01-01"
+}
+
 ### api/movie/[movie_id]
-
-GET http://localhost:3000/api/movie/2
-
-###
-
-GET http://localhost:3000/api/movie/100
+GET http://localhost:3000/api/movie/1000000
 
 ###
+GET http://localhost:3000/api/movie/4
 
+###
+PUT http://localhost:3000/api/movie/10
+Content-Type: application/json
+
+{
+    "title":"The Dark Knight",
+    "description": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+    "release_date":"2008-08-18"
+}
+
+###
+PATCH http://localhost:3000/api/movie/1000001
+Content-Type: application/json
+
+{
+    "release_date": "2008-07-18"
+}
+
+###
+PATCH http://localhost:3000/api/movie/4
+Content-Type: application/json
+
+{
+    "release_date": "2008-07-18"
+}
+
+###
+DELETE http://localhost:3000/api/movie/1000001
+
+###
 DELETE http://localhost:3000/api/movie/3
-
-###
-
-DELETE http://localhost:3000/api/movie/101
