@@ -80,6 +80,7 @@ export const parseRawMovieInput = (
   const parsedMovie: any = {};
   console.log("movie keys", Object.keys(movie));
   Object.keys(movie).forEach((key) => {
+    // @ts-ignore
     if (movieKeys.includes(key)) parsedMovie[key] = movie[key];
   });
 
